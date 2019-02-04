@@ -1,0 +1,22 @@
+{
+  "name": "cecs543_project-1",
+  "version": "0.0.1",
+  "description": "The first version of a version control for CECS 543.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Anthony1234567/CECS543_Project-1.git"
+  },
+  "author": "Sotheanith Sok, Anthony Martinez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Anthony1234567/CECS543_Project-1/issues"
+  },
+  "homepage": "https://github.com/Anthony1234567/CECS543_Project-1#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
