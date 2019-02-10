@@ -13,7 +13,7 @@ class Manifest {
     constructor(path) {
         if (isString(path)) {
             this._path = path;
-            this._content = {};
+            this._content = readFromFile(path);
         } else {
             throw new Error('Path must be a string.')
         }
@@ -54,6 +54,7 @@ class Manifest {
                 this._content[id] = [];
             }
             this._content[id] = artifacts;
+            writeToFile(this._path,this._content);
         } else {
             throw new Error("Invalid inputs detected.");
         }
@@ -67,6 +68,7 @@ class Manifest {
         if (isString(id) || isNumber(id)) {
             if (this._content[id] != undefined) {
                 delete this._content[id];
+                writeToFile(this._path,this._content);
             }
         } else {
             throw new Error("Invalid inputs detected.");
@@ -87,7 +89,7 @@ class Manifest {
             artifacts.forEach((value) => {
                 this._content[id].push(value);
             })
-
+            writeToFile(this._path,this._content);
         } else {
             throw new Error("Invalid inputs detected.");
         }
@@ -103,6 +105,7 @@ class Manifest {
             artifacts.forEach((value) => {
                 this.removeArtifactFromEntry(id, value);
             })
+            writeToFile(this._path,this._content);
         } else {
             throw new Error("Invalid inputs detected.");
         }
@@ -119,6 +122,7 @@ class Manifest {
                 this._content[id] = [];
             }
             this._content[id].push(artifact);
+            writeToFile(this._path,this._content);
         } else {
             throw new Error("Invalid inputs detected.");
         }
@@ -137,6 +141,7 @@ class Manifest {
                     this._content[id].splice(index, 1);
                 }
             }
+            writeToFile(this._path,this._content);
         } else {
             throw new Error("Invalid inputs detected.");
         }
@@ -150,19 +155,28 @@ class Manifest {
  * @param {string} filePath 
  */
 function readFromFile(filePath) {
-    let content = fs.readFileSync(filePath);
-    return JSON.parse(content);
+    if(fs.existsSync(filePath)){
+        let content = fs.readFileSync(filePath);
+        return JSON.parse(content);
+    }else{
+        return {};
+    }
+    
 }
 
 /**
- * An asynchronous writing of an object into a file.
+ * An synchronous writing of an object into a file.
  * @param {string} filePath 
  * @param {object} object 
  */
 function writeToFile(filePath, object) {
-    fs.writeFile(filePath, JSON.stringify(object), (err) => {
-        console.log(err);
-    })
+    let j = JSON.stringify(object,null,1);
+    // fs.writeFile(filePath, j, (err) => {
+    //     if(err){
+    //         console.log(err);
+    //     }
+    // })
+    fs.writeFileSync(filePath,j);
 }
 
 /**
