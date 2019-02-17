@@ -3,7 +3,7 @@ const app = express()
 app.use(express.json())
 
 app.get('/',(req,res,next)=>{
-    res.send("Hello There");
+    res.send("Hello World");
     res.end();
 })
 app.post('/create', (req,res,next)=>{
