@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/Anthony1234567/CECS543_Project-1#readme",
   "dependencies": {
-    "express": "^4.16.4"
+    "express": "^4.18.2"
   }
 }
